@@ -3,16 +3,22 @@ const fs = require('fs');
 const path = require('path');
 
 const router = express.Router();
-// Remember to update this list
-const endpointList = ['/', '/meta/heartbeat', '/meta/members'];
-const pathToFile = path.join(__dirname, '..', 'team_members.txt');
+const pathToEndpointFile = path.join(__dirname, 'endpoints.txt');
+const pathToTeamFile = path.join(__dirname, '..', 'team_members.txt');
 
 const userController = require('../controllers/users');
 const diaryController = require('../controllers/diaries');
 
+let endpointList = [];
 let teamMembers = [];
 
-fs.readFile(pathToFile, 'utf8', (error, data) => {
+
+fs.readFile(pathToEndpointFile, 'utf8', (error, data) => {
+  if (error) console.error('There was a problem retrieving implemented endpoints');
+  else endpointList = data.trim().split('\n');
+});
+
+fs.readFile(pathToTeamFile, 'utf8', (error, data) => {
   if (error) console.error('There was a problem retrieving team members', error);
   else teamMembers = data.trim().split('\n');
 });
