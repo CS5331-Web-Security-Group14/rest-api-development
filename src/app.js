@@ -12,7 +12,7 @@ const index = require('./routes/index');
 const app = express();
 const port = process.env.PORT || 8080;
 
-const whitelist = ['http://localhost', 'http://localhost:80'];
+const whitelist = ['http://localhost', 'http://localhost:80', 'http://localhost:8080'];
 const corsOptions = {
   origin: (origin, callback) => {
     if (whitelist.indexOf(origin) !== -1) {
