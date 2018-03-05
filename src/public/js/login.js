@@ -10,7 +10,6 @@ const registerUser = () => {
     data: JSON.stringify(dataObj),
     contentType: 'application/json',
     success: (response) => {
-      console.log(response);
       if (response.status === true) {
         // user created succesfully
         console.log('User registered successfully, login to continue');

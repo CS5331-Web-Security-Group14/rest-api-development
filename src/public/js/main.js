@@ -46,10 +46,8 @@ const getUserEntries = () => {
 
 const createNewEntry = () => {
   const dataObj = ConvertFormToJSON('#new-entry-form');
-  dataObj.public = $('#public').is(':checked');
+  dataObj.public = $('#public-checkbox').is(':checked');
   dataObj.token = sessionStorage.getItem('authToken');
-
-  console.log(dataObj);
 
   $.ajax({
     url: 'http://localhost:8080/diary/create',
@@ -57,16 +55,16 @@ const createNewEntry = () => {
     data: JSON.stringify(dataObj),
     contentType: 'application/json',
     success: (response) => {
-      console.log(response);
       if (response.status === true) {
         console.log('Diary entry created successfully with id: ', response.result.id);
-        window.location.reload();
+        window.location.href = 'home.html';
       } else if (response.error && response.error === 'Invalid authentication token.') {
         console.error('Invalid authentication token supplied');
+        window.location.reload();
       } else {
         console.error('There was a problem creating the diary entry!');
+        window.location.reload();
       }
-      window.location.reload();
     },
   });
 };
