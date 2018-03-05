@@ -8,10 +8,11 @@ const getPublicEntries = () => {
     contentType: 'application/json',
     success: (response) => {
       if (response.status === true) {
+        $('.list-group').empty();
         if (response.result.length > 0) {
           response.result.forEach((entry) => {
             const entryPublic = entry.public ? 'public' : 'private';
-            $('.list-group').append(`<div class="list-group-item list-group-item-action flex-column align-items-start"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">${entry.title}</h5><small class="text-muted public-status"> ${entryPublic}</small><div class="inner-div" data-entry-id="${entry.id}" data-entry-permission=" ${entryPublic}"><button class="btn btn-sm btn-outline-warning change-entry-permission">Change Permission</button><button class="btn btn-sm btn-outline-danger delete-entry">Delete</button></div></div><p class="mb-1">${entry.text}</p><small class="text-muted">${entry.author}</small><br><small class="text-muted"> ${entry.publish_date}</small></div>`);
+            $('.list-group').append(`<div class="list-group-item list-group-item-action flex-column align-items-start"><div class="d-flex w-100 justify-content-between"><h5 class="mb-1">${entry.title}</h5><small class="text-muted public-status"> ${entryPublic}</small><div class="inner-div" data-entry-id="${entry.id}" data-entry-permission=" ${entryPublic}"></div></div><p class="mb-1">${entry.text}</p><small class="text-muted">${entry.author}</small><br><small class="text-muted"> ${entry.publish_date}</small></div>`);
           });
         } else {
           alert('No public entries!');
@@ -29,6 +30,7 @@ const getUserEntries = () => {
     contentType: 'application/json',
     success: (response) => {
       if (response.status === true) {
+        $('.list-group').empty();
         if (response.result.length > 0) {
           response.result.forEach((entry) => {
             const entryPublic = entry.public ? 'public' : 'private';
@@ -77,6 +79,7 @@ const getUserProfile = () => {
     contentType: 'application/json',
     success: (response) => {
       if (response.status === true) {
+        $('.list-group').empty();
         $('.list-group').append(`<div class="card" style="width: 18rem;"><img class="card-img-top" src="../img/avatar.png" alt="Card image cap"><div class="card-body"><h5 class="card-title">${response.result.username}</h5><p class="card-text">Fullname: ${response.result.fullname}<br>Age: ${response.result.age}</p></div></div>`);
       } else if (response.error && response.error === 'Invalid authentication token.') {
         console.error('Invalid authentication token supplied');
@@ -102,12 +105,20 @@ const changePermission = (entryId, entryPermission) => {
     contentType: 'application/json',
     success: (response) => {
       if (response.status === true) {
-        window.location.reload();
+        if ($('#public').attr('isActive') === 'true') {
+          getPublicEntries();
+        } else {
+          getUserEntries();
+        }
       } else if (response.error && response.error === 'Invalid authentication token.') {
         console.error('Invalid authentication token supplied');
       } else {
         console.error('There was a problem changing the permissions');
-        window.location.reload();
+        if ($('#public').attr('isActive') === 'true') {
+          getPublicEntries();
+        } else {
+          getUserEntries();
+        }
       }
     },
   });
@@ -127,12 +138,20 @@ const deleteEntry = (entryId) => {
     success: (response) => {
       if (response.status === true) {
         console.log('Diary entry deleted successfully');
-        window.location.reload();
+        if ($('#public').attr('isActive') === 'true') {
+          getPublicEntries();
+        } else {
+          getUserEntries();
+        }
       } else if (response.error && response.error === 'Invalid authentication token.') {
         console.error('Invalid authentication token supplied');
       } else {
         console.error('There was a problem deleting the diary entry');
-        window.location.reload();
+        if ($('#public').attr('isActive') === 'true') {
+          getPublicEntries();
+        } else {
+          getUserEntries();
+        }
       }
     },
   });
@@ -159,9 +178,13 @@ const logout = () => {
 };
 
 $(document).ready(() => {
-  getPublicEntries();
+  if (!window.location == window.origin + '/new-entry.html') {
+    getPublicEntries();
+  }
 
   $('#public').click(() => {
+    $('#public').attr('isActive', 'true');
+    $('#my-entries').attr('isActive', 'false');
     $('#public').parent().addClass('active');
     $('#my-entries').parent().removeClass('active');
     $('#profile').parent().removeClass('active');
@@ -170,6 +193,8 @@ $(document).ready(() => {
   });
 
   $('#my-entries').click(() => {
+    $('#public').attr('isActive', 'false');
+    $('#my-entries').attr('isActive', 'true');
     $('#my-entries').parent().addClass('active');
     $('#public').parent().removeClass('active');
     $('#profile').parent().removeClass('active');
