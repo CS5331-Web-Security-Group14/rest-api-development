@@ -15,7 +15,7 @@ specified here: https://cs5331-assignments.github.io/rest-api-development/.
 
 2. User Log-in.
 
-![Login Screenshot](./public.img/Login.JPG)
+![Login Screenshot](./img/Login.JPG)
 
 3. View public diary entries.
 
