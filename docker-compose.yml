@@ -18,3 +18,9 @@ services:
       - ./data:/data/db
     ports:
       - "27017:27017"
+  node:
+    container_name: node
+    build:
+     context: . 
+     dockerfile: Dockerfile-node
+    
