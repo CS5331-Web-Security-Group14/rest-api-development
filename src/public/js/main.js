@@ -92,7 +92,7 @@ const changePermission = (entryId, entryPermission) => {
   const dataObj = {
     token: sessionStorage.getItem('authToken'),
     id: entryId,
-    public: !(entryPermission === 'public'),
+    public: !(entryPermission.trim() === 'public'),
   };
 
   $.ajax({
