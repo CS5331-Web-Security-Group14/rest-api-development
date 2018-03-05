@@ -34,7 +34,7 @@ const loginUser = () => {
     success: (response) => {
       if (response.status === true) {
         // user login succesfully
-        sessionStorage.setItem('authToken', response.token);
+        sessionStorage.setItem('authToken', response.result.token);
         window.location.href = 'home.html';
       } else {
         // user login failed
