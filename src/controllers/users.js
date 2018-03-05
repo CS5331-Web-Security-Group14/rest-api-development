@@ -59,9 +59,11 @@ const getUserByToken = (req, res) => {
       // user.status = true;
       res.status(200).send({
         status: true,
-        username: user.username,
-        fullname: user.fullname,
-        age: user.age,
+        result: {
+          username: user.username,
+          fullname: user.fullname,
+          age: user.age,
+        }
       });
     }
   });
