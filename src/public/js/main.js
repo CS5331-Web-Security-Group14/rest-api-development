@@ -178,7 +178,7 @@ const logout = () => {
 };
 
 $(document).ready(() => {
-  if (!window.location == window.origin + '/new-entry.html') {
+  if (!(window.location == window.origin + '/new-entry.html')) {
     getPublicEntries();
   }
 
