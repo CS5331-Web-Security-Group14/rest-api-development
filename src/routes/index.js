@@ -39,7 +39,7 @@ router.get('/meta/heartbeat', (req, res) => {
 
 router.get('/meta/members', (req, res) => {
   res.status(200).send({
-    status: 200,
+    status: true,
     result: teamMembers,
   });
 });
