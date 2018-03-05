@@ -4,140 +4,107 @@ CS5331 Assignment 1 Project Reference Repository
 
 ## Instructions
 
-Your objective is to implement a web application that provides the endpoints
+The objective is to implement a web application that provides the endpoints
 specified here: https://cs5331-assignments.github.io/rest-api-development/.
-
-The project has been packaged in an easy to set-up docker container with the
-skeleton code implemented in Python Flask. You are not restricted in terms of
-which language, web stack, or database you desire to use. However, please note
-that very limited support can be given to those who decide to veer off the
-beaten path.
-
-You may be required to modify the following files/directories:
-
-- Dockerfile - contains the environment setup scripts to ensure a homogenous
-  development environment
-- src/ - contains the front-end code in `html` and the skeleton Flask API code
-  in `service`
-- img/ - contains images used for this README
-
-Assuming you're developing on an Ubuntu 16.04 machine, the quick instructions
-to get up and running are:
-
-```
-# Install Docker
-
-sudo apt-get update
-sudo apt-get install \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    software-properties-common
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
-sudo apt-get update
-sudo apt-get install docker-ce
-
-# Verify Docker Works
-
-sudo docker run hello-world
-
-# Run the skeleton implementation
-
-sudo ./run.sh
-```
-
-(Docker CE installation instructions are from this
-[link](https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-using-the-repository).)
-
-**Please consult your assignment hand-out for detailed setup information.**
-
-## Grading
-
-The implementation will be graded in an automated fashion on an Ubuntu 16.04
-virtual machine by building the docker container found in your repository and
-running it. The grading script will interact with your API.
-
-The following ports are expected to be accessible:
-
-1. 80, on which static HTML content, including the front-end, is served.
-2. 8080, on which the API is exposed.
-
-To verify this, please run the following commands:
-
-```
-sudo ./run.sh
-```
-
-On a different window:
-
-```
-curl http://localhost:80
-curl http://localhost:8080
-```
-
-If a response is received, you're good to go.
-
-**Please replace the details below with information relevant to your team.**
 
 ## Screenshots
 
-Please replace the example screenshots with screenshots of your completed
-project. Feel free to include more than one.
+1. User Sign-up.
 
-![Sample Screenshot](./img/samplescreenshot.png)
+![Signup Screenshot](./img/Register.JPG)
+
+2. User Log-in.
+
+![Login Screenshot](./public.img/Login.JPG)
+
+3. View public diary entries.
+
+![Public Entries Screenshot](./img/PublicEntries.JPG)
+
+4. View user's public and private entries. (Toggle permission and delete entries)
+
+![User Entries Screenshot](./img/UserEntries.JPG)
+
+5. Create new diary entry.
+
+![New Entry Screenshot](./img/CreateEntry.JPG)
+
+5. View user profile.
+
+![User Profile Screenshot](./img/Profile.JPG)
 
 ## Administration and Evaluation
 
-Please fill out this section with details relevant to your team.
-
 ### Team Members
 
-1. Member 1 Name
-2. Member 2 Name
-3. Member 3 Name
-4. Member 4 Name
+1. **Luis Vazquez Diaz**
+2. **Divya Kamal Maddi**
+3. **Anusha Anandan**
+4. **Kowshik Sundararajan**
 
 ### Short Answer Questions
 
 #### Question 1: Briefly describe the web technology stack used in your implementation.
 
-Answer: Please replace this sentence with your answer.
+Answer: Our tech stacks consists of:
+* Backend: NoSQL database (MongoDB)
+* Server: Node.js with Express framework and Mongoose wrapper for MongoDB
+* Front-end: HTML, CSS, JavaScript, jQuery, Bootstrap4
 
 #### Question 2: Are there any security considerations your team thought about?
 
-Answer: Please replace this sentence with your answer.
+Answer: We considered the following security measures (have not implemented them):
+* XSS defenses by input/output sanitization and escaping.
+* CSRF defenses by using tokens and checking origin header.
+* Implementing CSP to prevent general injection attacks.
+* Password requirements (length, special characters, etc)
+
+We have implemented the following:
+* NoSQL injection defenses (implemented by using Mongoose prepared statements).
 
 #### Question 3: Are there any improvements you would make to the API specification to improve the security of the web application?
 
-Answer: Please replace this sentence with your answer.
+Answer: Since the token is sent in cleartext, session hijacking can take place.
 
 #### Question 4: Are there any additional features you would like to highlight?
 
-Answer: Please replace this sentence with your answer.
+Answer: We have implemented the following features:
+* Password security: Using a combination of hashing and salts.
+* We implemented a whitelist such that only http://localhost:80 can make requests to the API.
 
 #### Question 5: Is your web application vulnerable? If yes, how and why? If not, what measures did you take to secure it?
 
-Answer: Please replace this sentence with your answer.
+Answer: Yes, the web application is vulnerable to the following types of attacks:
+* XSS: inputs and outputs are not sanitized, html and urls are not escaped.
+* CSP: No implementation of CSP directives allows for injection of malicious scripts.
+* Lack of auto expiry of auth token can leave the app vulnerable if an attacker gains access - CSRF.
+* Unencrypted traffic - opens the gate for MiTM attacks.
 
 #### Feedback: Is there any other feedback you would like to give?
 
-Answer: Please replace this sentence with your answer.
+Answer: There are inconsistencies with the API documentation. `/diary/delete` should be implemented using `DELETE` verb and `/diary/permission` should be implemented using `PUT`. 
+
+Appreciate the flexibility in choosing our own tech stack, however with lack of experience in Docker, it has been quite difficult.
 
 ### Declaration
 
 #### Please declare your individual contributions to the assignment:
 
-1. Member 1 Name
-    - Integrated feature x into component y
-    - Implemented z
-2. Member 2 Name
-    - Wrote the front-end code
-3. Member 3 Name
-    - Designed the database schema
-4. Member 4 Name
-    - Implemented x
+1. **Luis Vazquez Diaz**
+    - Implemented Docker
+
+2. **Divya Kamal Maddi**
+    - Front-end
+    - Documentation
+
+3. **Anusha Anandan**
+    - Server-side
+    - Database
+    - Front-end
+
+4. **Kowshik Sundararajan**
+    - Server-side
+    - Database
+    - Front-end
+    - Documentation
 

@@ -1,0 +1,43 @@
+{
+  "name": "rest-api-development",
+  "version": "1.0.0",
+  "description": "CS5331 Assignment 1 Project Reference Repository",
+  "main": "app.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "node src/app.js",
+    "start-dev": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CS5331-Web-Security-Group14/rest-api-development.git"
+  },
+  "author": "Kowshik Sundararajan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CS5331-Web-Security-Group14/rest-api-development/issues"
+  },
+  "homepage": "https://github.com/CS5331-Web-Security-Group14/rest-api-development#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "hbs": "^4.0.1",
+    "mongoose": "^5.0.6",
+    "mongoose-auto-increment": "^5.0.1",
+    "morgan": "^1.9.0",
+    "serve-favicon": "^2.4.5",
+    "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.17.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "nodemon": "^1.15.0"
+  }
+}
