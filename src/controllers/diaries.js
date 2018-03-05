@@ -49,10 +49,10 @@ const deleteEntry = (req, res) => {
         author: user.username,
         id: req.body.id,
       }).exec((error, entry) => {
-        if (error || user == null) {
+        if (error || entry == null) {
           res.status(200).send({
             status: false,
-            error: 'No such entry',
+            error: 'Invalid authentication token.',
           });
         } else {
           entry.remove((err2) => {
@@ -122,9 +122,20 @@ const getAllPublicDiaries = (req, res) => {
         result: [],
       });
     } else {
+      const resultEntries = [];
+      entries.forEach((entry) => {
+        resultEntries.push({
+          id: entry.id,
+          title: entry.title,
+          author: entry.author,
+          publish_date: entry.publish_date,
+          public: entry.public,
+          text: entry.text,
+        });
+      });
       res.status(200).send({
         status: true,
-        result: entries,
+        result: resultEntries,
       });
     }
   });
@@ -148,9 +159,20 @@ const getEntriesByUsername = (req, res) => {
             error: 'Invalid authentication token.',
           });
         } else {
+          const resultEntries = [];
+          entries.forEach((entry) => {
+            resultEntries.push({
+              id: entry.id,
+              title: entry.title,
+              author: entry.author,
+              publish_date: entry.publish_date,
+              public: entry.public,
+              text: entry.text,
+            });
+          });
           res.status(200).send({
             status: true,
-            result: entries,
+            result: resultEntries,
           });
         }
       });

@@ -1,11 +1,16 @@
 const User = require('../models/User');
 
 const registerUser = (req, res) => {
-  const newUser = new User(req.body);
+  const newUser = new User({
+    username: req.body.username,
+    password: req.body.password,
+    fullname: req.body.fullname,
+    age: req.body.age,
+  });
 
   newUser.save((err) => {
     if (err) {
-      console.log(err);
+      console.error(err);
       res.status(200).send({
         status: false,
         error: 'User already exists!',
@@ -28,7 +33,9 @@ const authenticateUser = (req, res) => {
     } else {
       res.status(200).send({
         status: true,
-        token: user.token, // uuidv4 string auth token
+        result: {
+          token: user.token, // uuidv4 string auth token
+        },
       });
     }
   });
@@ -56,14 +63,13 @@ const getUserByToken = (req, res) => {
         error: 'Invalid authentication token.',
       });
     } else {
-      // user.status = true;
       res.status(200).send({
         status: true,
         result: {
           username: user.username,
           fullname: user.fullname,
           age: user.age,
-        }
+        },
       });
     }
   });
