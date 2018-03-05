@@ -27,7 +27,9 @@ const createDiaryEntry = (req, res) => {
           console.log('Successfully created a Diary entry.');
           res.status(201).send({
             status: true,
-            result: entry.id,
+            result: {
+              id: entry.id,
+            },
           });
         }
       });
