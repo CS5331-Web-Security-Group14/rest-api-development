@@ -85,10 +85,29 @@ If a response is received, you're good to go.
 
 ## Screenshots
 
-Please replace the example screenshots with screenshots of your completed
-project. Feel free to include more than one.
+1. User Sign-up.
 
-![Sample Screenshot](./img/samplescreenshot.png)
+![signup Screenshot](./img/Register.JPG)
+
+2. User Log-in.
+
+![login Screenshot](./img/Login.JPG)
+
+3. View public diary entries.
+
+![publientries Screenshot](./img/PublicEntries.JPG)
+
+4. View user's public and private entries. (Toggle permission and delete entries)
+
+![userentries Screenshot](./img/UserEntries.JPG)
+
+5. Create new diary entry.
+
+![newentry Screenshot](./img/CreateEntry.JPG)
+
+5. View user profile.
+
+![userprofile Screenshot](./img/Profile.JPG)
 
 ## Administration and Evaluation
 
@@ -96,10 +115,10 @@ Please fill out this section with details relevant to your team.
 
 ### Team Members
 
-1. Member 1 Name
-2. Member 2 Name
-3. Member 3 Name
-4. Member 4 Name
+1. Anusha Anandan
+2. Kowshik Sundararajan
+3. Maddi Kamal Divya
+4. Vazquez Diaz Luis
 
 ### Short Answer Questions
 
