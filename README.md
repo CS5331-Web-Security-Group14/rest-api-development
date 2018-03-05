@@ -53,12 +53,14 @@ Answer: Our tech stacks consists of:
 
 #### Question 2: Are there any security considerations your team thought about?
 
-Answer: We considered the following security measures:
-* NoSQL injection defenses (implemented by using Mongoose prepared statements).
+Answer: We considered the following security measures (have not implemented them):
 * XSS defenses by input/output sanitization and escaping.
 * CSRF defenses by using tokens and checking origin header.
 * Implementing CSP to prevent general injection attacks.
 * Password requirements (length, special characters, etc)
+
+We have implemented the following:
+* NoSQL injection defenses (implemented by using Mongoose prepared statements).
 
 #### Question 3: Are there any improvements you would make to the API specification to improve the security of the web application?
 
